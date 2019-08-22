@@ -16,6 +16,7 @@ def check_divisibility(number):
     Returns:
         True/False(bool):It return True-if devisible else returns False
     '''
+    
     if int(number,2) % 5 == 0:
         return True
     return False
@@ -52,11 +53,15 @@ def main():
             if(flag==True):
                 new_list.append(counter)
                 i+=1
+        print("The numbers you entered,in decimal are:")
+        for i in user_list:
+            print(i,"(",int(i,2),")",end=" ")
         if(i==0):
             print("None of these numbers are divible by 5")
         else:
-            print("The numbers divisible by 5 are:")
+            print("\nThe numbers divisible by 5 are:")
             print (",".join(new_list))
+
     except NotABinaryNumberException as NABN:
         print("Invalid Input:",NABN.value,"is not a Binary number")
         print("Please Enter Only Binary numbers(Number that consists of only 0 and 1)")
