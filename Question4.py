@@ -47,17 +47,17 @@ def main():
         i=0
         new_list=[]
         for counter in user_list:
-            if(re.search("[^01]*",counter)):
+            if(re.search("^[^0|1]*$",counter)):
                 raise NotABinaryNumberException(counter)
             flag=check_divisibility(counter)
             if(flag==True):
                 new_list.append(counter)
                 i+=1
         print("The numbers you entered,in decimal are:")
-        for i in user_list:
-            print(i,"(",int(i,2),")",end=" ")
+        for j in user_list:
+            print(j,"(",int(j,2),")",end=" ")
         if(i==0):
-            print("None of these numbers are divible by 5")
+            print("\nNone of these numbers are divible by 5")
         else:
             print("\nThe numbers divisible by 5 are:")
             print (",".join(new_list))
