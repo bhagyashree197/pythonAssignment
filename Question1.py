@@ -13,7 +13,9 @@
 # In case of input data being supplied to the question, it should be assumed to be a console input. 
 
 from math import *
-import py
+import re
+import sys
+from Exception_Handling import *
 
 def calculate_value(input_list):
     '''
@@ -46,22 +48,31 @@ def convert_into_list(user_input):
     '''
 
     user_input_list=user_input.split(",")
-    for i in range(len(user_input_list)):
-        user_input_list[i]=int(user_input_list[i])
     return user_input_list
+    
     
 def main():
     '''
     This is the main function from where the execution begins
     It is responsible for taking the input from user and call various functions
     '''
+    try:
+        user_input=input("Please Enter the numbers to be calculated(Separate the number using (,)):")
+        user_input_list=convert_into_list(user_input)
+        for i in range(len(user_input_list)):
+            if (re.search("\D",user_input_list[i])):
+                raise NotANumberException(user_input_list[i])
+            else:
+                user_input_list[i]=int(user_input_list[i])
+        user_result=calculate_value(user_input_list)
+        print("The result is\n{}".format(user_result))
 
-    user_input=input("Please Enter the numbers to be calculated(Separate the number using (,)):")
-    user_input_list=convert_into_list(user_input)
-    user_result=calculate_value(user_input_list)
-    print("The result is\n{}".format(user_result))
+    except NotANumberException as NumberException:
+        print("Invalid Input:'{}' is not a number".format(NumberException.value))
+        print("Only result of numbers can be calculated")
+       
+
     
-
 if  __name__=="__main__":
     main()
         

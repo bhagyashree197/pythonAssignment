@@ -7,7 +7,7 @@
 # Hints:
 # In case of input data being supplied to the question, it should be assumed to be a console input.
 
-def count_digits_and_characters(user_string):
+def count_upper_and_lower(user_string):
     '''
     The function counts the number of uppercase and lowercase characters within a string
     Parameter:
@@ -32,7 +32,7 @@ def main():
 
     print("Count Number Of Uppercase And Lowercase Characters In The String")
     user_input=input("Please Enter a string:")
-    uppercase_count,lowercase_count=count_digits_and_characters(user_input)
+    uppercase_count,lowercase_count=count_upper_and_lower(user_input)
     print("Number of UpperCase characters in the string: %d"%uppercase_count)
     print("Number of LowerCase characterd in the string is %d"%lowercase_count)
    

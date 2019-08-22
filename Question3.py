@@ -5,6 +5,8 @@
 # bag,hello,without,world
 # Hints:
 # In case of input data being supplied to the question, it should be assumed to be a console input.
+import re
+from Exception_Handling import *
 
 def sort_words(input_list):
 	'''
@@ -13,9 +15,9 @@ def sort_words(input_list):
 		input_list(list):It is a list that contains the string value given by the user
 		Returns:
 			input_list(list):The user sorted user list in ascending order
-	''' 
-    input_list.sort()
-    return input_list
+	'''
+	input_list.sort()
+	return input_list
 
 def convert_into_list(user_input):
 	'''
@@ -27,19 +29,28 @@ def convert_into_list(user_input):
     Returns:
         It returns the list format of the user given string
     '''
-
-    user_input_list=user_input.split(",")
-    return user_input_list
+	user_input_list=user_input.split(",")
+	return user_input_list
     
 def main():
 	'''
     This is the main function from where the execution begins
     It is responsible for taking the input from user and call various functions
     '''
-    user_input=input("Please enter the words to be sorted separated using (,) (Eg:-red,black,green,blue):")
-    user_list=convert_into_list(user_input)
-    sorted_words=sort_words(user_list)
-    print("The result after sorting words is:\n{}".format(sorted_words))
-     
+	try:
+		user_input=input("Please enter the words to be sorted separated using (,) (Eg:-red,black,green,blue):")
+		user_list=convert_into_list(user_input)
+		for i in user_list:
+			if(re.search("^[^a-zA-Z]*$",i)):
+				raise OnlyCharactersExpression
+		sorted_words=sort_words(user_list)
+		print("The result after sorting words is:\n{}".format(sorted_words))
+	except OnlyCharactersExpression as OnlyChar:
+		print("The input should contain only characters")
+		print("Special characters(!,@,#,%,&,*) and digits are not allowed")
+
+
+
+
 if __name__=="__main__":
     main()

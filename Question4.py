@@ -6,7 +6,8 @@
 # Notes: Assume the data is input by console.
 # Hints:
 # In case of input data being supplied to the question, it should be assumed to be a console input.
-
+import re
+from Exception_Handling import *
 def check_divisibility(number):
     '''
     The function converts the value in decimal form and checks whether it is divisible by 5
@@ -38,21 +39,27 @@ def main():
     This is the main function from where the execution begins
     It is responsible for taking the input from user and call various functions
     '''
+    try:
+        user_input=input("Please enter the binary numbers whose divisibility is to be checked separated by (,)(Eg:-1010,1011,1111):")
+        user_list=convert_into_list(user_input)
 
-    user_input=input("Please enter the binary numbers whose divisibility is to be checked separated by (,)(Eg:-1010,1011,1111):")
-    user_list=convert_into_list(user_input)
-    i=0
-    new_list=[]
-    for counter in user_list:
-        flag=check_divisibility(counter)
-        if(flag==True):
-            new_list.append(counter)
-            i+=1
-    if(i==0):
-        print("None of these numbers are divible by 5")
-    else:
-        print("The numbers divisible by 5 are:")
-        print (",".join(new_list))
+        i=0
+        new_list=[]
+        for counter in user_list:
+            if(re.search("^[^0,1]*$",counter)):
+                raise NotABinaryNumberException(counter)
+            flag=check_divisibility(counter)
+            if(flag==True):
+                new_list.append(counter)
+                i+=1
+        if(i==0):
+            print("None of these numbers are divible by 5")
+        else:
+            print("The numbers divisible by 5 are:")
+            print (",".join(new_list))
+    except NotABinaryNumberException as NABN:
+        print("Invalid Input:",NABN.value,"is not a Binary number")
+        print("Please Enter Only Binary numbers(Number that consists of only 0 and 1)")
             
 if __name__=="__main__":
     main()
