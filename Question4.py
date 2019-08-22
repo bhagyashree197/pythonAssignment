@@ -47,7 +47,7 @@ def main():
         i=0
         new_list=[]
         for counter in user_list:
-            if(re.search("^[^0,1]*$",counter)):
+            if(re.search("[^01]*",counter)):
                 raise NotABinaryNumberException(counter)
             flag=check_divisibility(counter)
             if(flag==True):
